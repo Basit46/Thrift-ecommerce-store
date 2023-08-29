@@ -7,8 +7,12 @@ export type ReviewPropType = {
 };
 
 export type ProductType = {
-  params: { productId: string };
-  searchParams: any;
+  id: number;
+  name: string;
+  image: string;
+  size: string;
+  price: string;
+  category: string;
 };
 
 export type UserDetailsType = {
@@ -16,4 +20,8 @@ export type UserDetailsType = {
   name: string | null;
   email: string | null;
   photoURL: string | null;
+};
+
+export type ProductPropType = {
+  product: ProductType;
 };

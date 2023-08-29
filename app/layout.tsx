@@ -2,7 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 import AuthContextProvider from "@/context/AuthContext";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "THRIFT",
@@ -18,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="max-w-[1400px] mx-auto font-basic">
+        <ToastContainer autoClose={3000} className="mt-[50px]" />
         <AuthContextProvider>
           <Navbar />
           <main>{children}</main>

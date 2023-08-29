@@ -1,4 +1,5 @@
 import Product from "@/components/Product";
+import { productList } from "@/data/products";
 import React from "react";
 
 const products = () => {
@@ -17,14 +18,9 @@ const products = () => {
         </p>
       </div>
       <div className="w-full flex flex-wrap gap-[40px] justify-center">
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
+        {productList.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { ProductType } from "@/types";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,9 +8,20 @@ import "slick-carousel/slick/slick-theme.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsTruck } from "react-icons/bs";
 import { BiBadgeCheck } from "react-icons/bi";
+import { productList } from "@/data/products";
+import { ProductType } from "@/types";
 
-const product = () => {
+const product = ({ params }: { params: { productId: string } }) => {
   const [isLiked, setIsliked] = useState(false);
+  const [resProduct, setResProduct] = useState<ProductType | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    setResProduct(
+      productList.find((product) => product.id.toString() == params.productId)
+    );
+  }, [params.productId]);
 
   const settings = {
     dots: true,
@@ -25,37 +35,39 @@ const product = () => {
   return (
     <div className="mx-auto w-[85%] h-[90vh] py-[50px] px-[60px] flex  ">
       <div className="w-[35%] border-black border-[1px]">
-        <Slider {...settings}>
-          <div className="relative w-[300px] h-[450px] overflow-hidden">
-            <Image
-              src="/cloth.webp"
-              fill
-              alt="Product"
-              className="object-contain"
-            />
-          </div>
-          <div className="relative w-[300px] h-[450px] overflow-hidden">
-            <Image
-              src="/cloth.webp"
-              fill
-              alt="Product"
-              className="object-contain scale-[1.5]"
-            />
-          </div>
-          <div className="relative w-[300px] h-[450px] overflow-hidden">
-            <Image
-              src="/cloth.webp"
-              fill
-              alt="Product"
-              className="object-contain scale-[2] origin-top"
-            />
-          </div>
-        </Slider>
+        {resProduct && (
+          <Slider {...settings}>
+            <div className="relative w-[300px] h-[450px] overflow-hidden">
+              <Image
+                src={resProduct?.image}
+                fill
+                alt="Product"
+                className="object-contain"
+              />
+            </div>
+            <div className="relative w-[300px] h-[450px] overflow-hidden">
+              <Image
+                src={resProduct?.image}
+                fill
+                alt="Product"
+                className="object-contain scale-[1.5]"
+              />
+            </div>
+            <div className="relative w-[300px] h-[450px] overflow-hidden">
+              <Image
+                src={resProduct?.image}
+                fill
+                alt="Product"
+                className="object-contain scale-[2] origin-top"
+              />
+            </div>
+          </Slider>
+        )}
       </div>
 
       <div className="w-[50%] p-[20px] flex flex-col">
-        <h1 className="text-[1.5rem] font-bold">Lands End Shirt</h1>
-        <p>Men</p>
+        <h1 className="text-[1.5rem] font-bold">{resProduct?.name}</h1>
+        <p>{resProduct?.category}</p>
         <div className="mt-[30px] bg-[yellow] rounded-[15px] w-full flex justify-between items-center px-[20px] py-[10px]">
           <p className="text-[2rem] font-bold">$69.00</p>
           <button className="bg-white px-[20px] py-[10px] rounded-[20px]">

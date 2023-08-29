@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { PiShoppingCart } from "react-icons/pi";
-import { BiUser } from "react-icons/bi";
+import { BiUser, BiUserMinus } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useAuthContext } from "@/context/AuthContext";
 import Image from "next/image";
 
 const Navbar = () => {
-  const { userDetails, handleSignIn } = useAuthContext();
+  const { userDetails, handleSignIn, handleSignOut } = useAuthContext();
   return (
     <nav className="sticky top-0 z-[20] bg-black text-white px-[70px] h-[12vh] flex justify-between items-center text-[1.1rem] font-medium">
       <h1 className="font-braahOne text-[2rem] font-bold">
@@ -36,7 +36,7 @@ const Navbar = () => {
         </Link>
         {userDetails.uid ? (
           <Link href="/" className="flex items-center gap-[5px]">
-            {userDetails.photoURL ? (
+            {userDetails.photoURL && (
               <div className="relative w-[40px] h-[40px] rounded-full bg-gray-400 overflow-hidden">
                 <Image
                   src={userDetails.photoURL}
@@ -45,10 +45,9 @@ const Navbar = () => {
                   alt="user photo"
                 />
               </div>
-            ) : (
-              <BiUser />
             )}{" "}
             Hello {userDetails.name?.slice(0, userDetails.name?.indexOf(" "))}
+            <BiUserMinus onClick={handleSignOut} className="text-[30px]" />
           </Link>
         ) : (
           <div onClick={handleSignIn} className="px-6 sm:px-0 max-w-sm">
