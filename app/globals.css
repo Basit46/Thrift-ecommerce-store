@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Braah+One&family=Oldenburg&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Table paddings */
+  td,
+  th {
+    @apply py-[10px];
+  }
+  footer li {
+    @apply opacity-40 hover:opacity-100 duration-300;
+  }
+
+  .shipping-section label {
+    @apply block font-medium mb-[5px];
+  }
+  .shipping-section input,
+  .shipping-section select {
+    @apply w-full border-gray-200 border-[2px] bg-gray-50 px-[8px] py-[5px] outline-gray-600 rounded-[8px] mb-[20px];
+  }
+}
+
+/*CSS to remove the default number input arrows*/
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
