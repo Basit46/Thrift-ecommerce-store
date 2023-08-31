@@ -1,3 +1,5 @@
+"use client";
+
 import Product from "@/components/Product";
 import { productList } from "@/data/products";
 import React from "react";

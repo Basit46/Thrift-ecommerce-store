@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { PiShoppingCart } from "react-icons/pi";
-import { BiUser, BiUserMinus } from "react-icons/bi";
+import { BiUserMinus } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useAuthContext } from "@/context/AuthContext";

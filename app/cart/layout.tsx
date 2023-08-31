@@ -6,7 +6,6 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div className="w-full py-[50px] px-[60px]">
       <div className="flex items-center gap-[10px]">

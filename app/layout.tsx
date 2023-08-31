@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import AuthContextProvider from "@/context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+import WishListContextProvider from "@/context/WishListContext";
+import CartContextProvider from "@/context/CartContext";
 
 export const metadata: Metadata = {
   title: "THRIFT",
@@ -22,9 +24,13 @@ export default function RootLayout({
       <body className="max-w-[1400px] mx-auto font-basic">
         <ToastContainer autoClose={3000} className="mt-[50px]" />
         <AuthContextProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <CartContextProvider>
+            <WishListContextProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </WishListContextProvider>
+          </CartContextProvider>
         </AuthContextProvider>
       </body>
     </html>
