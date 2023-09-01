@@ -1,5 +1,6 @@
 "use client";
 
+import { getLocalStorageData } from "@/utils/getLocalStorageData";
 import React, {
   createContext,
   useState,
@@ -11,7 +12,7 @@ import { toast } from "react-toastify";
 
 const CartContext = createContext({} as CartContextType);
 
-const initialState: CartItemType[] = [{ id: 1, quantity: 1 }];
+const initialState = getLocalStorageData("cartItems", []);
 
 type CartContextType = {
   cartItems: CartItemType[];
@@ -23,27 +24,17 @@ type CartItemType = {
   quantity: number;
 };
 
-type ActionType =
-  | {
-      type: "add";
-      payload: number;
-    }
-  | {
-      type: "remove";
-      payload: number;
-    }
-  | {
-      type: "updateQuantity";
-      payload: { id: number; quantity: number };
-    };
-//  type ReducerType = (state: CartItemType[], action: ActionType) => CartItemType[]
+type ActionType = {
+  type: string;
+  payload: number;
+};
 
 const reducer = (state: CartItemType[], action: ActionType) => {
   switch (action.type) {
     case "add":
       if (!state.find((item) => item.id === action.payload)) {
         toast("Product added");
-        return [...state, { id: action.payload, quantity: 3 }];
+        return [...state, { id: action.payload, quantity: 1 }];
       } else {
         toast("Product already added");
         return state;
@@ -53,12 +44,22 @@ const reducer = (state: CartItemType[], action: ActionType) => {
       toast("Product removed");
       return state.filter((item) => item.id != action.payload);
 
-    case "updateQuantity":
+    case "increment":
       return state.map((item) =>
-        item.id == action.payload.id
+        item.id == action.payload
           ? {
               ...item,
-              quantity: action.payload.quantity,
+              quantity: item.quantity + 1,
+            }
+          : item
+      );
+
+    case "decrement":
+      return state.map((item) =>
+        item.id == action.payload
+          ? {
+              ...item,
+              quantity: item.quantity <= 1 ? 1 : item.quantity - 1,
             }
           : item
       );
@@ -70,6 +71,11 @@ const reducer = (state: CartItemType[], action: ActionType) => {
 
 const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartItems, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   return (
     <CartContext.Provider value={{ cartItems, dispatch }}>
       {children}

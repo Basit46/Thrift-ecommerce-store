@@ -6,6 +6,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import { ProductType } from "@/types";
 import { productList } from "@/data/products";
 import { useCartContext } from "@/context/CartContext";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 type CartItemType = {
   id: number;
@@ -29,23 +30,9 @@ const CartItem = ({ item }: { item: CartItemType }) => {
     dispatch({ type: "remove", payload: id });
   };
 
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (parseFloat(e.target.value) < 1) {
-      dispatch({
-        type: "updateQuantity",
-        payload: { id: item.id, quantity: 1 },
-      });
-    } else {
-      dispatch({
-        type: "updateQuantity",
-        payload: { id: item.id, quantity: parseFloat(e.target.value) },
-      });
-    }
-  };
-
   return (
     <tr className="border-b-[1px] border-black/30 py-[10px]">
-      <td align="left" valign="top" className="flex gap-[10px]">
+      <td align="left" valign="top" className="w-[40%] flex gap-[10px]">
         {cartProduct.image && (
           <Image
             src={cartProduct.image}
@@ -60,13 +47,20 @@ const CartItem = ({ item }: { item: CartItemType }) => {
           <p>{cartProduct?.category}</p>
         </div>
       </td>
-      <td align="center" valign="top">
-        <input
-          type="number"
-          className="outline-none w-[50px] text-center border-[2px] border-black/10 cursor-none"
-          value={item.quantity}
-          onChange={(e) => handleQuantityChange(e)}
-        />
+      <td align="center" valign="top" className="">
+        <div className="w-fit flex border-[2px] border-black/30 items-center gap-[5px] p-[4px]">
+          <button
+            onClick={() => dispatch({ type: "increment", payload: item.id })}
+          >
+            <AiOutlinePlus />
+          </button>
+          <span className="w-[30px] text-center">{item.quantity}</span>
+          <button
+            onClick={() => dispatch({ type: "decrement", payload: item.id })}
+          >
+            <AiOutlineMinus />
+          </button>
+        </div>
 
         <div
           onClick={() => handleItemRemove(item.id)}
@@ -76,8 +70,10 @@ const CartItem = ({ item }: { item: CartItemType }) => {
           Remove
         </div>
       </td>
-      <td align="right" valign="top">
-        <p className="font-semibold text-[1.2rem]">{cartProduct?.price}</p>
+      <td align="right" valign="top" className="w-[15%]">
+        <p className="font-semibold text-[1.2rem]">
+          ${(cartProduct?.price * item.quantity).toFixed(2)}
+        </p>
       </td>
     </tr>
   );

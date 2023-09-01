@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="max-w-[1400px] mx-auto font-basic">
-        <ToastContainer autoClose={3000} className="mt-[50px]" />
+        <ToastContainer autoClose={2000} className="mt-[50px]" />
         <AuthContextProvider>
           <CartContextProvider>
             <WishListContextProvider>
