@@ -7,6 +7,7 @@ import AuthContextProvider from "@/context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import WishListContextProvider from "@/context/WishListContext";
 import CartContextProvider from "@/context/CartContext";
+import ShippingDetailsProvider from "@/context/ShippingDetailsContext";
 
 export const metadata: Metadata = {
   title: "THRIFT",
@@ -24,13 +25,15 @@ export default function RootLayout({
       <body className="max-w-[1400px] mx-auto font-basic">
         <ToastContainer autoClose={2000} className="mt-[50px]" />
         <AuthContextProvider>
-          <CartContextProvider>
-            <WishListContextProvider>
-              <Navbar />
-              <main>{children}</main>
-              <Footer />
-            </WishListContextProvider>
-          </CartContextProvider>
+          <ShippingDetailsProvider>
+            <CartContextProvider>
+              <WishListContextProvider>
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </WishListContextProvider>
+            </CartContextProvider>
+          </ShippingDetailsProvider>
         </AuthContextProvider>
       </body>
     </html>

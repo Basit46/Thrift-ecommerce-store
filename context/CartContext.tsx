@@ -1,5 +1,6 @@
 "use client";
 
+import { productList } from "@/data/products";
 import { getLocalStorageData } from "@/utils/getLocalStorageData";
 import React, {
   createContext,
@@ -17,6 +18,7 @@ const initialState = getLocalStorageData("cartItems", []);
 type CartContextType = {
   cartItems: CartItemType[];
   dispatch: React.Dispatch<ActionType>;
+  totalPrice: number;
 };
 
 type CartItemType = {
@@ -71,13 +73,23 @@ const reducer = (state: CartItemType[], action: ActionType) => {
 
 const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartItems, dispatch] = useReducer(reducer, initialState);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  useEffect(() => {
+    let total = 0;
+    cartItems.forEach((item) => {
+      const res = productList.find((product) => product.id == item.id);
+      total += res ? res.price * item.quantity : 0;
+    });
+    setTotalPrice(total);
+  }, [cartItems]);
+
   return (
-    <CartContext.Provider value={{ cartItems, dispatch }}>
+    <CartContext.Provider value={{ cartItems, dispatch, totalPrice }}>
       {children}
     </CartContext.Provider>
   );

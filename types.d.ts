@@ -25,3 +25,13 @@ export type UserDetailsType = {
 export type ProductPropType = {
   product: ProductType;
 };
+
+export type ShippingDetailsType = {
+  name: string;
+  email: string;
+  telephone: string;
+  country: string;
+  city: string;
+  address: string;
+  postalcode: string;
+};
