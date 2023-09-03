@@ -1,42 +1,55 @@
 "use client";
 
 import { useCartContext } from "@/context/CartContext";
-import { useShippingDetailsContext } from "@/context/ShippingDetailsContext";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { productList } from "@/data/products";
+import { getStripe } from "@/utils/getStripe";
+import CustomLoader from "@/components/CustomLoader";
+import { useAuthContext } from "@/context/AuthContext";
+import { countryCodes } from "@/data/countries";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const { totalPrice } = useCartContext();
-  const { proceedToCheckout } = useShippingDetailsContext();
+  const { totalPrice, cartItems, dispatch, loading, setLoading } =
+    useCartContext();
+  const { userDetails } = useAuthContext();
 
-  const handleCheckout = () => {
-    if (proceedToCheckout) {
-      alert("Checked out");
-    } else {
-      router.push("/cart/shippingdetails");
+  const customerData = {
+    email: userDetails.email,
+    name: userDetails.name,
+    countryCodes: countryCodes,
+    cartItems: cartItems.map((item) => {
+      if (productList.find((product) => product.id == item.id)) {
+        return {
+          ...productList.find((product) => product.id == item.id),
+          quantity: item.quantity,
+        };
+      } else {
+        return item;
+      }
+    }),
+  };
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      body: JSON.stringify(customerData),
+    });
+
+    const sessionID = await response.json();
+    const stripe = await getStripe();
+    dispatch({ type: "clearcart", payload: 1 });
+
+    const result = await stripe?.redirectToCheckout({
+      sessionId: sessionID,
+    });
+    if (result?.error) {
+      alert(result.error.message);
     }
+    setLoading(false);
   };
 
   return (
     <div className="w-full py-[50px] px-[60px]">
-      <div className="flex items-center gap-[10px]">
-        <Link
-          href="/cart"
-          className={`${!pathname.includes("shippingdetails") && "font-bold"}`}
-        >
-          Cart
-        </Link>
-        <MdKeyboardArrowRight />
-        <Link
-          href="/cart/shippingdetails"
-          className={`${pathname.includes("shippingdetails") && "font-bold"}`}
-        >
-          Shipping Details
-        </Link>
-      </div>
       <div className="mt-[20px] w-full min-h-[70vh] flex gap-[50px] ">
         <div className="w-[70%] h-full">{children}</div>
         <div className="flex-1 h-fit">
@@ -57,11 +70,19 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 ${totalPrice.toFixed(2)}
               </p>
             </div>
+
             <button
               onClick={handleCheckout}
-              className="w-full bg-black/80 hover:bg-black text-white py-[10px] rounded-[8px] text-[1.2rem]"
+              className="w-full bg-black/80 hover:bg-black text-white py-[10px] rounded-[8px] text-[1.2rem] flex justify-center items-center gap-[5px]"
             >
-              {proceedToCheckout ? "CHECKOUT NOW" : "ADD SHIPPING DETAILS"}
+              {loading ? (
+                <>
+                  <CustomLoader />
+                  <p>Loading...</p>
+                </>
+              ) : (
+                "CHECKOUT NOW"
+              )}
             </button>
           </div>
         </div>

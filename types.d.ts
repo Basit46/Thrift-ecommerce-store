@@ -13,6 +13,7 @@ export type ProductType = {
   size: string;
   price: number;
   category: string;
+  quantity?: number;
 };
 
 export type UserDetailsType = {

@@ -8,6 +8,7 @@ import React, {
   useReducer,
   useEffect,
   useContext,
+  SetStateAction,
 } from "react";
 import { toast } from "react-toastify";
 
@@ -19,6 +20,8 @@ type CartContextType = {
   cartItems: CartItemType[];
   dispatch: React.Dispatch<ActionType>;
   totalPrice: number;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type CartItemType = {
@@ -66,6 +69,9 @@ const reducer = (state: CartItemType[], action: ActionType) => {
           : item
       );
 
+    case "clearcart":
+      return [];
+
     default:
       return state;
   }
@@ -74,6 +80,7 @@ const reducer = (state: CartItemType[], action: ActionType) => {
 const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartItems, dispatch] = useReducer(reducer, initialState);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -89,7 +96,9 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, [cartItems]);
 
   return (
-    <CartContext.Provider value={{ cartItems, dispatch, totalPrice }}>
+    <CartContext.Provider
+      value={{ cartItems, dispatch, totalPrice, loading, setLoading }}
+    >
       {children}
     </CartContext.Provider>
   );
