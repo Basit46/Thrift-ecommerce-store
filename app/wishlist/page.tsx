@@ -14,20 +14,20 @@ import { productList } from "@/data/products";
 const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
   //Global state
   const { likedProducts } = useWishListContext();
-  const {} = useAuthContext();
+  const { userDetails } = useAuthContext();
 
   //Local state
   const [dbProducts, setDbProducts] = useState([] as ProductType[]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const getUserData = async () => {
       if (searchParams.uid) {
         const docRef = doc(db, "wishlists", searchParams.uid);
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
           const products: ProductType[] = [];
-          console.log("Document data:", docSnap.data());
           const res: number[] = docSnap.data().products;
           res.forEach((item) => {
             const resProduct = productList.find(
@@ -37,15 +37,30 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
               products.push(resProduct);
             }
           });
+          setLoading(false);
           setDbProducts(products);
         } else {
           console.log("No such document!");
         }
+      } else {
+        setLoading(false);
       }
     };
 
     getUserData();
   }, []);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `${window.location.href}?uid=${userDetails.uid}`
+      );
+      alert("Copied to CLipboard");
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+
   return (
     <div className="py-[50px] px-[60px] ">
       <div className="w-full h-[200px] bg-[#ddd7dc]/70 px-[30px] flex flex-col ">
@@ -64,13 +79,21 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
             <p className="text-[1.2rem] font-secondary font-medium">
               Share with your friends
             </p>
-            <p className="self-end mt-[20px] text-[1.2rem] text-blue-700 flex items-center gap-[6px]">
+            <button
+              onClick={copyToClipboard}
+              className="self-end mt-[20px] text-[1.2rem] text-blue-700 flex items-center gap-[6px]"
+            >
               COPY LINK <RxClipboardCopy className="text-[30px]" />
-            </p>
+            </button>
           </>
         )}
       </div>
       <div className="mt-[50px] w-full flex flex-wrap gap-[40px]">
+        {loading && (
+          <p className="mt-[20px] text-[1.5rem] font-secondary font-medium">
+            Loading...
+          </p>
+        )}
         {searchParams.uid &&
           dbProducts?.map((product) => (
             <Product key={product.id} product={product} />
