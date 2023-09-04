@@ -209,3 +209,78 @@ export const productList: ProductType[] = [
     category: "men",
   },
 ];
+
+export const featuredProducts: ProductType[] = [
+  {
+    id: 1,
+    name: "AllSaints T-Shirt",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/080b3143-964b-4ab3-8daa-865c0c585904_640x.jpg?v=1693311132",
+    size: "Small",
+    price: 38.5,
+    category: "men",
+  },
+  {
+    id: 2,
+    name: "Vans T-Shirt",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/7832f542-8f6c-4549-87d4-e228f68cbb37_640x.jpg?v=1693296246",
+    size: "Medium",
+    price: 15.0,
+    category: "men",
+  },
+  {
+    id: 8,
+    name: "Vans T-Shirt",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/a95750a1-38b9-4903-acbf-a3479a676fd5_640x.jpg?v=1693299366",
+    size: "Size Medium",
+    price: 14.5,
+    category: "men",
+  },
+  {
+    id: 10,
+    name: "Scotch & Soda Mini Dress",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/c5eddd57-2be9-4503-a8e8-35f2b41d4d54_640x.jpg?v=1693805433",
+    size: "Size Small",
+    price: 23.75,
+    category: "women",
+  },
+  {
+    id: 14,
+    name: "Zara Midi Dress",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/5678e2a7-7a52-48a6-96ae-9df03d792b11_640x.jpg?v=1693631286",
+    size: "Size Medium",
+    price: 5.25,
+    category: "women",
+  },
+  {
+    id: 15,
+    name: "Oasis Mini Dress",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/e0090996-bc56-4518-8505-8dcb783c083e_640x.jpg?v=1693599970",
+    size: "Size UK 12",
+    price: 8.0,
+    category: "women",
+  },
+  {
+    id: 22,
+    name: "Adidas Men's Sports Bottoms",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/6a56b325-28bf-4e33-9c1f-9013f4e1c359_640x.jpg?v=1693810926",
+    size: "Large",
+    price: 5.0,
+    category: "men",
+  },
+  {
+    id: 23,
+    name: "Nike Men's Sports Bottoms",
+    image:
+      "https://cdn.shopify.com/s/files/1/1754/6207/files/b317051b-85df-47ba-95aa-01b9e2774f80_640x.jpg?v=1693810927",
+    size: "Large",
+    price: 7.0,
+    category: "men",
+  },
+];

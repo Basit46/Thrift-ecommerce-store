@@ -1,7 +1,7 @@
 import Hero from "@/components/Hero";
 import Product from "@/components/Product";
 import Review from "@/components/Review";
-import { productList } from "@/data/products";
+import { featuredProducts } from "@/data/products";
 import { reviews } from "@/data/reviews";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="flex flex-wrap gap-[40px] justify-center">
-          {productList.map((product) => (
+          {featuredProducts.map((product) => (
             <Product key={product.id} product={product} />
           ))}
         </div>

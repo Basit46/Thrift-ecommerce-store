@@ -10,17 +10,37 @@ import { BsTruck } from "react-icons/bs";
 import { BiBadgeCheck } from "react-icons/bi";
 import { productList } from "@/data/products";
 import { ProductType } from "@/types";
+import { useCartContext } from "@/context/CartContext";
+import { useWishListContext } from "@/context/WishListContext";
 
 const product = ({ params }: { params: { productId: string } }) => {
+  //Global state
+  const { dispatch } = useCartContext();
+  const { likedProducts, handleLike, handleUnLike } = useWishListContext();
+
+  //Local state
+  const [resProduct, setResProduct] = useState({} as ProductType);
   const [isLiked, setIsliked] = useState(false);
-  const [resProduct, setResProduct] = useState<ProductType | undefined>(
-    undefined
-  );
 
   useEffect(() => {
-    setResProduct(
-      productList.find((product) => product.id.toString() == params.productId)
+    if (
+      likedProducts.find((likedProduct) => likedProduct.id == resProduct.id)
+    ) {
+      setIsliked(true);
+    } else {
+      setIsliked(false);
+    }
+  }, [likedProducts]);
+
+  useEffect(() => {
+    const foundProduct = productList.find(
+      (product) => product.id.toString() === params.productId
     );
+
+    // Check if a product was found before setting the state
+    if (foundProduct) {
+      setResProduct(foundProduct);
+    }
   }, [params.productId]);
 
   const settings = {
@@ -70,7 +90,10 @@ const product = ({ params }: { params: { productId: string } }) => {
         <p>{resProduct?.category}</p>
         <div className="mt-[30px] bg-[yellow] rounded-[15px] w-full flex justify-between items-center px-[20px] py-[10px]">
           <p className="text-[2rem] font-bold">$69.00</p>
-          <button className="bg-white px-[20px] py-[10px] rounded-[20px]">
+          <button
+            onClick={() => dispatch({ type: "add", payload: resProduct?.id })}
+            className="bg-white px-[20px] py-[10px] rounded-[20px]"
+          >
             ADD TO CART
           </button>
         </div>
@@ -78,12 +101,12 @@ const product = ({ params }: { params: { productId: string } }) => {
           <p className="text-[1.3rem] font-bold">ADD TO WISHLIST</p>
           {isLiked ? (
             <AiFillHeart
-              onClick={() => setIsliked(false)}
+              onClick={() => handleUnLike(resProduct.id)}
               className="text-[60px] text-[red]"
             />
           ) : (
             <AiOutlineHeart
-              onClick={() => setIsliked(true)}
+              onClick={() => handleLike(resProduct)}
               className="text-[60px] text-[red]"
             />
           )}
