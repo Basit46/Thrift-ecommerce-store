@@ -8,8 +8,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { countryCodes } from "@/data/countries";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
-  const { totalPrice, cartItems, dispatch, loading, setLoading } =
-    useCartContext();
+  const { totalPrice, cartItems, loading, setLoading } = useCartContext();
   const { userDetails } = useAuthContext();
 
   const customerData = {
@@ -37,11 +36,11 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 
     const sessionID = await response.json();
     const stripe = await getStripe();
-    dispatch({ type: "clearcart", payload: 1 });
 
     const result = await stripe?.redirectToCheckout({
       sessionId: sessionID,
     });
+
     if (result?.error) {
       alert(result.error.message);
     }
