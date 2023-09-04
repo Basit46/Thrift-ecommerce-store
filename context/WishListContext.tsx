@@ -3,6 +3,9 @@
 import { ProductType } from "@/types";
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
+import { db } from "@/firebaseConfig";
+import { collection, setDoc, doc } from "firebase/firestore";
+import { useAuthContext } from "./AuthContext";
 
 const WishListContext = createContext({} as WishListContextType);
 
@@ -18,6 +21,10 @@ const WishListContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  //Global State
+  const { userDetails } = useAuthContext();
+
+  //Local State
   const [likedProducts, setLikedProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
@@ -43,6 +50,21 @@ const WishListContextProvider = ({
     setLikedProducts([...likedProducts, product]);
     toast("Added to Wishlist");
   };
+
+  const wishlistRef = collection(db, "wishlists");
+
+  useEffect(() => {
+    const addProductsToDB = async () => {
+      if (userDetails.uid != null) {
+        await setDoc(doc(wishlistRef, userDetails.uid), {
+          products: likedProducts.map((item) => item.id),
+        });
+      }
+    };
+
+    addProductsToDB();
+  }, [likedProducts]);
+
   return (
     <WishListContext.Provider
       value={{ likedProducts, setLikedProducts, handleLike, handleUnLike }}

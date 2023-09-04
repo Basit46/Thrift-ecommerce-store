@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAIicEC7DcSUU70cOGb59oQ6d89otBj57o",
   authDomain: "thrift-store-64bb4.firebaseapp.com",
@@ -12,3 +14,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore();
