@@ -11,7 +11,12 @@ import { useAuthContext } from "@/context/AuthContext";
 import { ProductType } from "@/types";
 import { productList } from "@/data/products";
 
-const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
+const wishlist = ({
+  searchParams,
+}: {
+  params?: any;
+  searchParams?: { uid: string };
+}) => {
   //Global state
   const { likedProducts } = useWishListContext();
   const { userDetails } = useAuthContext();
@@ -23,7 +28,7 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
   useEffect(() => {
     setLoading(true);
     const getUserData = async () => {
-      if (searchParams.uid) {
+      if (searchParams?.uid) {
         const docRef = doc(db, "wishlists", searchParams.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -64,7 +69,7 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
   return (
     <div className="py-[50px] px-[60px] ">
       <div className="w-full h-[200px] bg-[#ddd7dc]/70 px-[30px] flex flex-col ">
-        {searchParams.uid ? (
+        {searchParams?.uid ? (
           <>
             <h1 className="text-[3rem] font-braahOne">Your Friend's List</h1>
             <p className="mt-[30px] text-[1.2rem] font-secondary font-medium">
@@ -94,12 +99,14 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
             Loading...
           </p>
         )}
-        {searchParams.uid &&
-          dbProducts?.map((product) => (
+        {searchParams?.uid &&
+          dbProducts.length > 0 &&
+          dbProducts.map((product) => (
             <Product key={product.id} product={product} />
           ))}
-        {!searchParams.uid &&
-          likedProducts?.map((product) => (
+        {!searchParams?.uid &&
+          likedProducts.length > 0 &&
+          likedProducts.map((product) => (
             <Product key={product.id} product={product} />
           ))}
       </div>
