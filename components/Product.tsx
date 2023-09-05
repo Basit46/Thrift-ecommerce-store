@@ -41,7 +41,7 @@ const Product = ({ product }: ProductPropType) => {
       <div>
         <div className="flex justify-between items-center">
           <p>{product.name}</p>
-          <p className="text-[14px] font-bold">${product.price.toFixed(2)}</p>
+          <p className="text-[14px] font-bold">${product.price?.toFixed(2)}</p>
         </div>
         <div className="flex justify-between items-center">
           <button
