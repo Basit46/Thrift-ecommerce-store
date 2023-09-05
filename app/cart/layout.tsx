@@ -6,6 +6,7 @@ import { getStripe } from "@/utils/getStripe";
 import CustomLoader from "@/components/CustomLoader";
 import { useAuthContext } from "@/context/AuthContext";
 import { countryCodes } from "@/data/countries";
+import { toast } from "react-toastify";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   const { totalPrice, cartItems, loading, setLoading } = useCartContext();
@@ -28,23 +29,27 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleCheckout = async () => {
-    setLoading(true);
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      body: JSON.stringify(customerData),
-    });
+    if (userDetails.uid) {
+      setLoading(true);
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        body: JSON.stringify(customerData),
+      });
 
-    const sessionID = await response.json();
-    const stripe = await getStripe();
+      const sessionID = await response.json();
+      const stripe = await getStripe();
 
-    const result = await stripe?.redirectToCheckout({
-      sessionId: sessionID,
-    });
+      const result = await stripe?.redirectToCheckout({
+        sessionId: sessionID,
+      });
 
-    if (result?.error) {
-      alert(result.error.message);
+      if (result?.error) {
+        alert(result.error.message);
+      }
+      setLoading(false);
+    } else {
+      toast("You need to sign in");
     }
-    setLoading(false);
   };
 
   return (

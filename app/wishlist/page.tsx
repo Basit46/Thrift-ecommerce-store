@@ -10,6 +10,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { useAuthContext } from "@/context/AuthContext";
 import { ProductType } from "@/types";
 import { productList } from "@/data/products";
+import { toast } from "react-toastify";
 
 const wishlist = ({
   searchParams,
@@ -60,7 +61,7 @@ const wishlist = ({
       await navigator.clipboard.writeText(
         `${window.location.href}?uid=${userDetails.uid}`
       );
-      alert("Copied to Clipboard");
+      toast("Copied to Clipboard");
     } catch (err) {
       console.log("Error", err);
     }

@@ -24,7 +24,9 @@ const product = ({ params }: { params: { productId: string } }) => {
 
   useEffect(() => {
     if (
-      likedProducts.find((likedProduct) => likedProduct.id == resProduct.id)
+      likedProducts.find(
+        (likedProduct) => likedProduct.id == parseFloat(params.productId)
+      )
     ) {
       setIsliked(true);
     } else {
@@ -36,7 +38,6 @@ const product = ({ params }: { params: { productId: string } }) => {
     const foundProduct = productList.find(
       (product) => product.id.toString() === params.productId
     );
-
     // Check if a product was found before setting the state
     if (foundProduct) {
       setResProduct(foundProduct);
