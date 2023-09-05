@@ -55,7 +55,7 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
       await navigator.clipboard.writeText(
         `${window.location.href}?uid=${userDetails.uid}`
       );
-      alert("Copied to CLipboard");
+      alert("Copied to Clipboard");
     } catch (err) {
       console.log("Error", err);
     }
@@ -99,7 +99,7 @@ const wishlist = ({ searchParams }: { searchParams: { uid: string } }) => {
             <Product key={product.id} product={product} />
           ))}
         {!searchParams.uid &&
-          likedProducts.map((product) => (
+          likedProducts?.map((product) => (
             <Product key={product.id} product={product} />
           ))}
       </div>

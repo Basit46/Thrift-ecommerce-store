@@ -10,7 +10,13 @@ const men = async () => {
   return (
     <div className="w-full py-[50px] px-[60px]">
       <div className="w-full h-fit bg-[#ddd7dc]/70 flex gap-[100px] items-center px-[30px]">
-        <Image src="/man.png" width={300} height={500} alt="Woman Image" />
+        <Image
+          src="/man.png"
+          width={300}
+          height={500}
+          alt="Woman Image"
+          className="w-auto h-auto"
+        />
         <div>
           <h1 className="text-[3rem] font-braahOne">
             Quality pre-loved fashion

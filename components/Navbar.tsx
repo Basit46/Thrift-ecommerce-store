@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-[20] bg-black text-white px-[70px] h-[12vh] flex justify-between items-center text-[1.1rem] font-medium">
       <h1 className="font-braahOne text-[2rem] font-bold">
-        <Link href="/">THRIFT~</Link>
+        <Link href="/">THRIFT</Link>
       </h1>
       <div className="flex gap-[20px] items-center">
         <Link className="hover:underline duration-200" href="/products">
@@ -43,11 +43,13 @@ const Navbar = () => {
 
       <div className="flex gap-[30px] items-center">
         <Link href="/wishlist" className="flex items-center gap-[5px]">
-          <AiFillHeart className="text-[red] text-[30px]" /> WishList
+          <AiFillHeart className="text-[red] text-[30px]" />
+          <p>WishList</p>
           {likedProducts.length > 0 && <p>({likedProducts.length})</p>}
         </Link>
         <Link href="/cart" className="relative flex items-center gap-[5px]">
-          <PiShoppingCart className="text-[30px]" /> Cart
+          <PiShoppingCart className="text-[30px]" />
+          <p>Cart</p>
           {cartItems.length > 0 && <p>({cartItems.length})</p>}
         </Link>
         {userDetails.uid ? (
@@ -60,10 +62,15 @@ const Navbar = () => {
                     fill
                     className="object-contain"
                     alt="user photo"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
               )}
-              Hello {userDetails.name?.slice(0, userDetails.name?.indexOf(" "))}
+              <p>
+                Hello{" "}
+                {userDetails.name?.slice(0, userDetails.name?.indexOf(" "))}
+              </p>
+
               {open ? (
                 <MdOutlineKeyboardArrowUp onClick={() => setOpen(false)} />
               ) : (
