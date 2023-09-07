@@ -18,6 +18,16 @@
   }
 }
 
+/* animation to remove cover page */
+.cover-page {
+  animation: slide-up 3s 1s forwards ease-in;
+}
+@keyframes slide-up {
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
 /*CSS to remove the default number input arrows*/
 input[type="number"] {
   -moz-appearance: textfield;

@@ -7,6 +7,7 @@ import AuthContextProvider from "@/context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import WishListContextProvider from "@/context/WishListContext";
 import CartContextProvider from "@/context/CartContext";
+import CoverPage from "@/components/CoverPage";
 
 export const metadata: Metadata = {
   title: "THRIFT",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <AuthContextProvider>
           <CartContextProvider>
             <WishListContextProvider>
+              <CoverPage />
               <Navbar />
               <main>{children}</main>
               <Footer />
