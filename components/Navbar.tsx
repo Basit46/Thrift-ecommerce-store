@@ -92,14 +92,14 @@ const Navbar = () => {
             <div
               className={`${
                 !open && "hidden"
-              } absolute top-[50px] left-0 w-full h-[80px] bg-white border-black border-[1px] flex flex-col justify-end items-center pb-[10px]`}
+              } absolute top-[50px] left-0 w-[200px] h-[80px] bg-white border-black border-[1px] flex flex-col justify-end items-center pb-[10px]`}
             >
               <button
                 onClick={() => {
                   handleSignOut();
                   setOpen(false);
                 }}
-                className="w-[80%] mx-auto  bg-black text-white hover:text-white hover:bg-black px-[10px] py-[5px] active:px-[8px] border-black border-[1px]"
+                className="w-[80%] mx-auto bg-black text-white hover:text-white hover:bg-black px-[10px] py-[5px] active:px-[8px] border-black border-[1px]"
               >
                 SIGN OUT
               </button>

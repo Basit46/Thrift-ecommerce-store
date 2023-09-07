@@ -32,14 +32,14 @@ const CartItem = ({ item }: { item: CartItemType }) => {
 
   return (
     <tr className="border-b-[1px] border-black/30 py-[10px]">
-      <td align="left" valign="top" className="w-full md:w-[40%]">
+      <td align="left" valign="top" className="md:w-[40%]">
         <div className="flex gap-[10px]">
           {cartProduct.image && (
             <Image
               src={cartProduct.image}
               height={60}
               width={60}
-              className="w-[70px] h-fit md:h-auto md:w-auto border-black/100 border-[2px] rounded-[8px] object-contain"
+              className="hidden vsm:block w-[70px] h-fit md:h-auto md:w-auto border-black/100 border-[2px] rounded-[8px] object-contain"
               alt="Product"
             />
           )}
@@ -72,7 +72,7 @@ const CartItem = ({ item }: { item: CartItemType }) => {
           Remove
         </div>
       </td>
-      <td align="right" valign="top" className="w-[15%]">
+      <td align="right" valign="top" className="w-[30%] vsm:w-[15%]">
         <p className="font-semibold text-[1.2rem]">
           ${(cartProduct?.price * item.quantity).toFixed(2)}
         </p>
