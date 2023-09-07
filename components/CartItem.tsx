@@ -48,36 +48,8 @@ const CartItem = ({ item }: { item: CartItemType }) => {
             <p>{cartProduct?.category}</p>
           </div>
         </div>
-
-        <div className="md:hidden my-[10px]">
-          <div className="w-fit flex border-[2px] border-black/30 items-center gap-[5px] p-[4px]">
-            <button
-              onClick={() => dispatch({ type: "increment", payload: item.id })}
-            >
-              <AiOutlinePlus />
-            </button>
-            <span className="w-[30px] text-center">{item.quantity}</span>
-            <button
-              onClick={() => dispatch({ type: "decrement", payload: item.id })}
-            >
-              <AiOutlineMinus />
-            </button>
-          </div>
-
-          <div
-            onClick={() => handleItemRemove(item.id)}
-            className="mt-[5px] flex items-center gap-[5px] font-bold text-[0.9rem] cursor-pointer"
-          >
-            <MdOutlineDelete className="text-[red]" />
-            Remove
-          </div>
-        </div>
-
-        <p className="md:hidden font-semibold text-[1.2rem]">
-          ${(cartProduct?.price * item.quantity).toFixed(2)}
-        </p>
       </td>
-      <td align="center" valign="top" className="hidden md:block">
+      <td align="center" valign="top" className="">
         <div className="w-fit flex border-[2px] border-black/30 items-center gap-[5px] p-[4px]">
           <button
             onClick={() => dispatch({ type: "increment", payload: item.id })}
@@ -100,7 +72,7 @@ const CartItem = ({ item }: { item: CartItemType }) => {
           Remove
         </div>
       </td>
-      <td align="right" valign="top" className="w-[15%] hidden md:block">
+      <td align="right" valign="top" className="w-[15%]">
         <p className="font-semibold text-[1.2rem]">
           ${(cartProduct?.price * item.quantity).toFixed(2)}
         </p>

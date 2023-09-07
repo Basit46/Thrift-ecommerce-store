@@ -54,11 +54,11 @@ const product = ({ params }: { params: { productId: string } }) => {
   };
 
   return (
-    <div className="mx-auto w-[85%] h-[90vh] py-[50px] px-[60px] flex  ">
-      <div className="w-[35%] border-black border-[1px]">
+    <div className="mx-auto w-full xmd:w-[85%] min-h-[90vh] py-[50px] px-[10px] vsm:px-[20px] md:px-[60px] xmd:flex">
+      <div className="w-full xmd:w-[35%] border-black border-[1px]">
         {resProduct && (
           <Slider {...settings}>
-            <div className="relative w-[300px] h-[450px] overflow-hidden">
+            <div className="relative w-auto xmd:w-[300px] h-[300px] xmd:h-[450px] overflow-hidden">
               <Image
                 src={resProduct?.image}
                 fill
@@ -66,7 +66,7 @@ const product = ({ params }: { params: { productId: string } }) => {
                 className="object-contain"
               />
             </div>
-            <div className="relative w-[300px] h-[450px] overflow-hidden">
+            <div className="relative w-auto xmd:w-[300px] h-[300px] xmd:h-[450px] overflow-hidden">
               <Image
                 src={resProduct?.image}
                 fill
@@ -74,7 +74,7 @@ const product = ({ params }: { params: { productId: string } }) => {
                 className="object-contain scale-[1.5]"
               />
             </div>
-            <div className="relative w-[300px] h-[450px] overflow-hidden">
+            <div className="relative w-auto xmd:w-[300px] h-[300px] xmd:h-[450px] overflow-hidden">
               <Image
                 src={resProduct?.image}
                 fill
@@ -86,7 +86,7 @@ const product = ({ params }: { params: { productId: string } }) => {
         )}
       </div>
 
-      <div className="w-[50%] p-[20px] flex flex-col">
+      <div className="mt-[30px] xmd:mt-0 w-full xmd:w-[50%] p-0 xmd:p-[20px] flex flex-col">
         <h1 className="text-[1.5rem] font-bold">{resProduct?.name}</h1>
         <p>{resProduct?.category}</p>
         <div className="mt-[30px] bg-[yellow] rounded-[15px] w-full flex justify-between items-center px-[20px] py-[10px]">
