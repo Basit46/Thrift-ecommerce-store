@@ -1,18 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useCartContext } from "@/context/CartContext";
+import { useWishListContext } from "@/context/WishListContext";
 import { PiShoppingCart } from "react-icons/pi";
 import { AiFillHeart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useAuthContext } from "@/context/AuthContext";
-import Image from "next/image";
-import { useCartContext } from "@/context/CartContext";
-import { useWishListContext } from "@/context/WishListContext";
+import { FaBars, FaTimes } from "react-icons/fa";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import { useState } from "react";
+import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   //Global State
@@ -21,15 +23,19 @@ const Navbar = () => {
   const { likedProducts } = useWishListContext();
 
   //Local state
+  //Open and Close Menu
+  const [openMenu, setOpenMenu] = useState(false);
   //Log out button state
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-[20] bg-black text-white px-[70px] h-[12vh] flex justify-between items-center text-[1.1rem] font-medium">
+    <nav className="sticky top-0 z-[20] bg-black text-white px-[20px] xmd:px-[70px] h-[12vh] flex justify-between items-center text-[1.1rem] font-medium">
       <h1 className="font-braahOne text-[2rem] font-bold">
-        <Link href="/">THRIFT</Link>
+        <Link onClick={() => setOpenMenu(false)} href="/">
+          THRIFT
+        </Link>
       </h1>
-      <div className="flex gap-[20px] items-center">
+      <div className="hidden xl:flex gap-[20px] items-center">
         <Link className="hover:underline duration-200" href="/products">
           All Products
         </Link>
@@ -41,13 +47,19 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="flex gap-[30px] items-center">
-        <Link href="/wishlist" className="flex items-center gap-[5px]">
+      <div className="flex-1 xl:flex-none flex justify-end xl:justify-start gap-[30px] items-center mr-[10px] md:mr-[20px] xl:mr-0">
+        <Link
+          href="/wishlist"
+          className="hidden xl:flex items-center gap-[5px]"
+        >
           <AiFillHeart className="text-[red] text-[30px]" />
           <p>WishList</p>
           {likedProducts.length > 0 && <p>({likedProducts.length})</p>}
         </Link>
-        <Link href="/cart" className="relative flex items-center gap-[5px]">
+        <Link
+          href="/cart"
+          className="relative hidden xl:flex items-center gap-[5px]"
+        >
           <PiShoppingCart className="text-[30px]" />
           <p>Cart</p>
           {cartItems.length > 0 && <p>({cartItems.length})</p>}
@@ -105,6 +117,21 @@ const Navbar = () => {
           </div>
         )}
       </div>
+
+      {openMenu ? (
+        <FaTimes
+          onClick={() => setOpenMenu(false)}
+          className="block xl:hidden text-[25px] text-[red]"
+        />
+      ) : (
+        <FaBars
+          onClick={() => setOpenMenu(true)}
+          className="block xl:hidden text-[25px]"
+        />
+      )}
+
+      {/* Visible on screens with width less than 1280px */}
+      <MobileMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
     </nav>
   );
 };

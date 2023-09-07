@@ -13,6 +13,10 @@ const config: Config = {
         secondary: ["Oldenburg", "cursive"],
         braahOne: ["Braah One", "sans-serif"],
       },
+      screens: {
+        vsm: "400px",
+        xmd: "800px",
+      },
     },
   },
   plugins: [],

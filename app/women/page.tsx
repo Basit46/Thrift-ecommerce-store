@@ -7,20 +7,20 @@ const women = async () => {
     (product) => product.category === "women"
   );
   return (
-    <div className="w-full py-[50px] px-[60px]">
-      <div className="w-full h-fit bg-[#ddd7dc]/70 flex gap-[100px] items-center px-[30px]">
+    <div className="w-full py-[50px] px-[20px] xmd:px-[60px]">
+      <div className="w-full h-fit bg-[#ddd7dc]/70 flex gap-[100px] items-center py-[10px] xl:py-0 px-[20px] xl:px-[30px]">
         <Image
           src="/woman.webp"
           width={300}
           height={500}
           alt="Woman Image"
-          className="w-auto h-auto"
+          className="w-auto h-auto hidden xl:block"
         />
         <div>
-          <h1 className="text-[3rem] font-braahOne">
-            Quality Summer Clothings
+          <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
+            Quality Summer Clothings for Women
           </h1>
-          <p className="text-[1.2rem] font-secondary font-medium">
+          <p className="mt-[20px] xl:mt-0 text-[1.2rem] font-secondary font-medium">
             Start Shopping 😉
           </p>
         </div>

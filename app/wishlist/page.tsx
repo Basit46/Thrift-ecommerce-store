@@ -68,18 +68,20 @@ const wishlist = ({
   };
 
   return (
-    <div className="py-[50px] px-[60px] ">
-      <div className="w-full h-[200px] bg-[#ddd7dc]/70 px-[30px] flex flex-col ">
+    <div className="py-[50px] px-[20px] xmd:px-[60px] ">
+      <div className="w-full h-fit xl:h-[200px] bg-[#ddd7dc]/70 p-[20px] xl:px-[30px] flex flex-col ">
         {searchParams?.uid ? (
           <>
-            <h1 className="text-[3rem] font-braahOne">Your Friend's List</h1>
+            <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
+              Your Friend's List
+            </h1>
             <p className="mt-[30px] text-[1.2rem] font-secondary font-medium">
               No gree for am oo!!
             </p>
           </>
         ) : (
           <>
-            <h1 className="text-[3rem] font-braahOne">
+            <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
               Your Favourite Products
             </h1>
             <p className="text-[1.2rem] font-secondary font-medium">

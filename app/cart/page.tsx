@@ -14,8 +14,12 @@ const cart = () => {
           <thead>
             <tr className="border-b-[2px] border-black/30 mb-[20px]">
               <th align="left">PRODUCT</th>
-              <th align="center">QUANTITY</th>
-              <th align="right">PRICE</th>
+              <th className="hidden md:block" align="center">
+                QUANTITY
+              </th>
+              <th className="hidden md:block" align="right">
+                PRICE
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +34,7 @@ const cart = () => {
             width={500}
             height={300}
             alt="Empty cart"
-            className=""
+            className="w-full xmd:w-auto h-fit xmd:h-auto"
           />
           <p className="text-[1.1rem] mt-[20px]">
             Your cart is empty, start adding products now

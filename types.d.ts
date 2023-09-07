@@ -36,3 +36,8 @@ export type ShippingDetailsType = {
   address: string;
   postalcode: string;
 };
+
+export type MobileMenuPropTypes = {
+  openMenu: boolean;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+};

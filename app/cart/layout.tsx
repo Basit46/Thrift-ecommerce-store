@@ -53,9 +53,11 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="w-full py-[50px] px-[60px]">
-      <div className="mt-[20px] w-full min-h-[70vh] flex gap-[50px] ">
-        <div className="w-[70%] h-full">{children}</div>
+    <div className="w-full py-[30px] xl:py-[50px] px-[20px] xl:px-[60px]">
+      <div className="mt-[20px] w-full min-h-[70vh] flex flex-col xmd:flex-row gap-[50px] ">
+        <div className="w-full xmd:w-[70%] max-h-[350px] overflow-y-auto">
+          {children}
+        </div>
         <div className="flex-1 h-fit">
           <div className="w-full p-[20px] border-[2px] border-black/10 rounded-[8px]">
             <div className="w-full flex justify-between items-center">

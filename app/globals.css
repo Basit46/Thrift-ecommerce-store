@@ -11,16 +11,10 @@
   th {
     @apply py-[10px];
   }
+
+  /* footer section design */
   footer li {
     @apply opacity-40 hover:opacity-100 duration-300;
-  }
-
-  .shipping-section label {
-    @apply block font-medium mb-[5px];
-  }
-  .shipping-section input,
-  .shipping-section select {
-    @apply w-full border-gray-200 border-[2px] bg-gray-50 px-[8px] py-[5px] outline-gray-600 rounded-[8px] mb-[20px];
   }
 }
 

@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <section className="py-[50px] px-[60px]">
-        <div className="flex justify-between items-center">
+      <section className="py-[50px] px-[20px] xmd:px-[60px]">
+        <div className="md:flex justify-between items-center">
           <h1 className="font-braahOne text-[3rem] mb-[10px]">
             Featured Products
           </h1>
@@ -18,7 +18,7 @@ export default function Home() {
             View All
           </Link>
         </div>
-        <div className="flex flex-wrap gap-[40px] justify-center">
+        <div className="mt-[40px] md:mt-0 flex flex-wrap gap-[40px] justify-center">
           {featuredProducts.map((product) => (
             <Product key={product.id} product={product} />
           ))}
