@@ -18,10 +18,10 @@ const men = async () => {
           className="w-auto h-auto hidden xl:block"
         />
         <div>
-          <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
+          <h1 className="text-[2rem] vsm:text-[2.5rem] xmd:text-[3rem] text-center vsm:text-left font-braahOne leading-[1]">
             Quality pre-loved fashion for Men
           </h1>
-          <p className="mt-[20px] text-[1.2rem] font-secondary font-medium">
+          <p className="mt-[20px] text-[1.2rem] font-secondary font-medium text-center vsm:text-left">
             Start Shopping 😎
           </p>
         </div>

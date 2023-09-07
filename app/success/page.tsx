@@ -11,7 +11,7 @@ const Success = () => {
     dispatch({ type: "clearcart", payload: 1 });
   }, []);
   return (
-    <div className="h-[80vh] px-[60px] py-[50px] flex flex-col items-center">
+    <div className="h-[80vh] px-[20px] md:px-[60px] py-[50px] flex flex-col items-center">
       <Image
         src="/success.png"
         width={500}

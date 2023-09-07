@@ -78,7 +78,7 @@ const Navbar = () => {
                   />
                 </div>
               )}
-              <p>
+              <p className="hidden vsm:block">
                 Hello{" "}
                 {userDetails.name?.slice(0, userDetails.name?.indexOf(" "))}
               </p>

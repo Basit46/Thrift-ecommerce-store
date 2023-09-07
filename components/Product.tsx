@@ -26,7 +26,7 @@ const Product = ({ product }: ProductPropType) => {
     dispatch({ type: "add", payload: id });
   };
   return (
-    <div className="w-[241.59px] h-fit">
+    <div className="w-[85%] vsm:w-[241.59px] h-fit">
       <Link href={`/products/${product?.id}`}>
         <div className="w-full h-[241.59px] relative border-[1px] border-black overflow-hidden">
           <Image

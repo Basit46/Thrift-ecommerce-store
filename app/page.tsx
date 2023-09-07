@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <section className="py-[50px] px-[20px] xmd:px-[60px]">
         <div className="md:flex justify-between items-center">
-          <h1 className="font-braahOne text-[3rem] mb-[10px]">
+          <h1 className="font-braahOne text-[2rem] vsm:text-[3rem] mb-[10px] leading-[1]">
             Featured Products
           </h1>
           <Link href="/" className="text-blue-500 underline text-[1.5rem]">
