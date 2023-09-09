@@ -11,6 +11,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { ProductType } from "@/types";
 import { productList } from "@/data/products";
 import { toast } from "react-toastify";
+import AnimatePage from "@/components/AnimatePage";
 
 const wishlist = ({
   searchParams,
@@ -68,52 +69,54 @@ const wishlist = ({
   };
 
   return (
-    <div className="py-[50px] px-[20px] xmd:px-[60px] ">
-      <div className="w-full h-fit xl:h-[200px] bg-[#ddd7dc]/70 p-[20px] xl:px-[30px] flex flex-col ">
-        {searchParams?.uid ? (
-          <>
-            <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
-              Your Friend's List
-            </h1>
-            <p className="mt-[30px] text-[1.2rem] font-secondary font-medium">
-              No gree for am oo!!
+    <AnimatePage>
+      <div className="py-[50px] px-[20px] xmd:px-[60px] ">
+        <div className="w-full h-fit xl:h-[200px] bg-[#ddd7dc]/70 p-[20px] xl:px-[30px] flex flex-col ">
+          {searchParams?.uid ? (
+            <>
+              <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
+                Your Friend's List
+              </h1>
+              <p className="mt-[30px] text-[1.2rem] font-secondary font-medium">
+                No gree for am oo!!
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
+                Your Favourite Products
+              </h1>
+              <p className="text-[1.2rem] font-secondary font-medium">
+                Share with your friends
+              </p>
+              <button
+                onClick={copyToClipboard}
+                className="self-end mt-[20px] text-[1.2rem] text-blue-700 flex items-center gap-[6px]"
+              >
+                COPY LINK <RxClipboardCopy className="text-[30px]" />
+              </button>
+            </>
+          )}
+        </div>
+        <div className="mt-[50px] w-full flex flex-wrap gap-[40px]">
+          {loading && (
+            <p className="mt-[20px] text-[1.5rem] font-secondary font-medium">
+              Loading...
             </p>
-          </>
-        ) : (
-          <>
-            <h1 className="text-[2.5rem] xmd:text-[3rem] font-braahOne leading-[1]">
-              Your Favourite Products
-            </h1>
-            <p className="text-[1.2rem] font-secondary font-medium">
-              Share with your friends
-            </p>
-            <button
-              onClick={copyToClipboard}
-              className="self-end mt-[20px] text-[1.2rem] text-blue-700 flex items-center gap-[6px]"
-            >
-              COPY LINK <RxClipboardCopy className="text-[30px]" />
-            </button>
-          </>
-        )}
+          )}
+          {searchParams?.uid &&
+            dbProducts.length > 0 &&
+            dbProducts.map((product) => (
+              <Product key={product.id} product={product} />
+            ))}
+          {!searchParams?.uid &&
+            likedProducts.length > 0 &&
+            likedProducts.map((product) => (
+              <Product key={product.id} product={product} />
+            ))}
+        </div>
       </div>
-      <div className="mt-[50px] w-full flex flex-wrap gap-[40px]">
-        {loading && (
-          <p className="mt-[20px] text-[1.5rem] font-secondary font-medium">
-            Loading...
-          </p>
-        )}
-        {searchParams?.uid &&
-          dbProducts.length > 0 &&
-          dbProducts.map((product) => (
-            <Product key={product.id} product={product} />
-          ))}
-        {!searchParams?.uid &&
-          likedProducts.length > 0 &&
-          likedProducts.map((product) => (
-            <Product key={product.id} product={product} />
-          ))}
-      </div>
-    </div>
+    </AnimatePage>
   );
 };
 
