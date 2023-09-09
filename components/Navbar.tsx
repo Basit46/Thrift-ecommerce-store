@@ -92,7 +92,7 @@ const Navbar = () => {
             <div
               className={`${
                 !open && "hidden"
-              } absolute top-[50px] left-0 w-[200px] h-[80px] bg-white border-black border-[1px] flex flex-col justify-end items-center pb-[10px]`}
+              } absolute top-[50px] left-[-100px] sm:left-0 w-[200px] h-[80px] bg-white border-black border-[1px] flex flex-col justify-end items-center pb-[10px]`}
             >
               <button
                 onClick={() => {
