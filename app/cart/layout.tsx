@@ -55,7 +55,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full py-[30px] xl:py-[50px] px-[20px] xl:px-[60px]">
       <div className="mt-[20px] w-full min-h-[70vh] flex flex-col xl:flex-row gap-[50px] ">
-        <div className="w-full xl:w-[70%] h-[400px] border-b-2 border-black overflow-y-auto">
+        <div className="w-full xl:w-[70%] h-[400px] xl:h-fit  border-b-2 border-black xl:border-none overflow-y-auto">
           {children}
         </div>
         <div className="flex-1 h-fit">
