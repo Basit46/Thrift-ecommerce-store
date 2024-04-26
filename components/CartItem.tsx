@@ -22,7 +22,6 @@ const CartItem = ({ item }: { item: CartItemType }) => {
     const res = productList.find((product) => product.id == item.id);
     if (res) {
       setCartProduct(res);
-      return;
     }
   }, [item]);
 

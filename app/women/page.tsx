@@ -3,10 +3,11 @@ import Product from "@/components/Product";
 import { productList } from "@/data/products";
 import Image from "next/image";
 
-const women = async () => {
-  const fetchedProducts = await productList.filter(
+const women = () => {
+  const fetchedProducts = productList.filter(
     (product) => product.category === "women"
   );
+
   return (
     <AnimatePage>
       <div className="w-full py-[50px] px-[20px] xmd:px-[60px]">

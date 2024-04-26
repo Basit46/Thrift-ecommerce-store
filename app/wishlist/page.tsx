@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Product from "@/components/Product";
 import { useWishListContext } from "@/context/WishListContext";
-import { useEffect } from "react";
 import { RxClipboardCopy } from "react-icons/rx";
 import { db } from "@/firebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
