@@ -13,7 +13,7 @@ import { productList } from "@/data/products";
 import { toast } from "react-toastify";
 import AnimatePage from "@/components/AnimatePage";
 
-const wishlist = ({
+const Wishlist = ({
   searchParams,
 }: {
   params?: any;
@@ -120,4 +120,4 @@ const wishlist = ({
   );
 };
 
-export default wishlist;
+export default Wishlist;

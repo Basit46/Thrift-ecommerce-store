@@ -14,7 +14,7 @@ import { useCartContext } from "@/context/CartContext";
 import { useWishListContext } from "@/context/WishListContext";
 import AnimatePage from "@/components/AnimatePage";
 
-const product = ({ params }: { params: { productId: string } }) => {
+const Product = ({ params }: { params: { productId: string } }) => {
   //Global state
   const { dispatch } = useCartContext();
   const { likedProducts, handleLike, handleUnLike } = useWishListContext();
@@ -130,4 +130,4 @@ const product = ({ params }: { params: { productId: string } }) => {
   );
 };
 
-export default product;
+export default Product;
