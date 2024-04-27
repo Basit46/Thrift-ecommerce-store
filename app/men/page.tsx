@@ -3,8 +3,8 @@ import Product from "@/components/Product";
 import { productList } from "@/data/products";
 import Image from "next/image";
 
-const men = async () => {
-  const fetchedProducts = await productList.filter(
+const men = () => {
+  const fetchedProducts = productList.filter(
     (product) => product.category === "men"
   );
 

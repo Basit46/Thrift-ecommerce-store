@@ -8,7 +8,6 @@ import React, {
   useReducer,
   useEffect,
   useContext,
-  SetStateAction,
 } from "react";
 import { toast } from "react-toastify";
 
