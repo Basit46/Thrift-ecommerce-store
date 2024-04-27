@@ -63,13 +63,13 @@ const CartItem = ({ item }: { item: CartItemType }) => {
           </button>
         </div>
 
-        <div
+        <button
           onClick={() => handleItemRemove(item.id)}
           className="mt-[10px] flex justify-center items-center gap-[5px] font-bold text-[0.9rem] cursor-pointer"
         >
           <MdOutlineDelete className="text-[red]" />
           Remove
-        </div>
+        </button>
       </td>
       <td align="right" valign="top" className="w-[30%] vsm:w-[15%]">
         <p className="font-semibold text-[1.2rem]">
